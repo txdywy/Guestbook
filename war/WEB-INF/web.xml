@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<servlet>
+		<servlet-name>Guestbook</servlet-name>
+		<servlet-class>guestbook.GuestbookServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Guestbook</servlet-name>
+		<url-pattern>/guestbook</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>guestbook.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<servlet-class>webcanvas.WelcomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WelcomeServlet</servlet-name>
+		<url-pattern>/welcome</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>webcanvas.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>webcanvas.ApiInitListener</listener-class>
+	</listener>
+</web-app>
