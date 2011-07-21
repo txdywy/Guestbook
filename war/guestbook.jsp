@@ -18,7 +18,7 @@
 %>
 <p>Hello!
 <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-to include your name with greetings you post.</p>
+to include your name with greetings you post.这里是《有客书局》...</p>
 <%
     }
 %>

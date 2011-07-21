@@ -9,5 +9,6 @@
 	</system-properties>
 	<static-files>
   		<include path="/favicon.ico" />
+  		<include path="/js/renren_js_sdk/renren.js" />
 	</static-files>
 </appengine-web-app>
