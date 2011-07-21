@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/Json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/Renren-api-java-sdk.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/gwt-maps-1.1.0"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
