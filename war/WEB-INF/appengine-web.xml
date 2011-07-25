@@ -10,5 +10,6 @@
 	<static-files>
   		<include path="/favicon.ico" />
   		<include path="/js/renren_js_sdk/renren.js" />
+  		<include path="/stylesheets/main.css" />
 	</static-files>
 </appengine-web-app>
