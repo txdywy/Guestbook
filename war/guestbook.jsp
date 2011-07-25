@@ -15,6 +15,11 @@
   <head>
     <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script type="text/javascript">
+		function handleResponse(profile) {
+			document.getElementsByTagName('img')[0].src = profile.data.thumbnailUrl;
+		}
+	</script>
   </head>
 
   <body>
@@ -32,12 +37,7 @@
 <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
 
 <img src="" alt=""/>
-<script type="text/javascript">
-		function handleResponse(profile) {
-			document.getElementsByTagName('img')[0].src = profile.data.thumbnailUrl;
-		}
-</script>
-<script src="https://www.googleapis.com/buzz/v1/people/<%= user.getEmail() %>/@self?alt=json&callback=handleResponse"></script>
+<script src="https://www.googleapis.com/buzz/v1/people/<%= user.getEmail() %>/@self?alt=json&pp=1&key=AIzaSyBwmogjo3IlL5jt_8vIfytvIESY0mYgE-A&callback=handleResponse"></script>
 
 <a href="https://twitter.com/txdywy" class="twitter-follow-button">Follow @txdywy</a>
 <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
@@ -82,7 +82,8 @@ to include your name with greetings you post.</p>
             } else {
                 %>
                 <p><b><%= ((User) greeting.getProperty("user")).getNickname() %></b> wrote:</p>
-                
+                <img src="" alt=""/>
+				<script src="https://www.googleapis.com/buzz/v1/people/<%= user.getEmail() %>/@self?alt=json&pp=1&key=AIzaSyBwmogjo3IlL5jt_8vIfytvIESY0mYgE-A&callback=handleResponse"></script>
                 <%
             }
             %>
