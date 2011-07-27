@@ -39,10 +39,65 @@
         }
       }
     </script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+	  html { height: 100% }
+	  body { height: 100%; margin: 0; padding: 0 }
+	  #map_canvas { height: 100% }
+	</style>
+	<script type="text/javascript"
+	    src="http://maps.googleapis.com/maps/api/js?sensor=true">
+	</script>
+	<script type="text/javascript">
+	  function initialize() {
+	    //var latlng = new google.maps.LatLng(-34.397, 150.644);
+	    var initialLocation;
+		var newyork = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
+		var browserSupportFlag =  new Boolean();
+		var infowindow = new google.maps.InfoWindow();
+	    var myOptions = {
+	      zoom: 18,
+	      //center: latlng,
+	      mapTypeId: google.maps.MapTypeId.SATELLITE
+	    };
+	    var map = new google.maps.Map(document.getElementById("map_canvas"),
+	        myOptions);
+	    
+	    // Try W3C Geolocation (Preferred)
+	    if(navigator.geolocation) {
+	      browserSupportFlag = true;
+	      navigator.geolocation.getCurrentPosition(function(position) {
+	        initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+	        contentString = "您原来窝藏在这?!!<p></p><p>——小本记下了.</p>";
+	        map.setCenter(initialLocation);
+	        infowindow.setContent(contentString);
+	        infowindow.setPosition(initialLocation);
+	        infowindow.open(map);
+	      }, function() {
+	        handleNoGeolocation(browserSupportFlag);
+	      });
+	    } else {
+	        browserSupportFlag = false;
+	        handleNoGeolocation(browserSupportFlag);
+	    }
+	      
+	    function handleNoGeolocation(errorFlag) {
+	        if (errorFlag == true) {
+	          alert("Geolocation service failed.");
+	          initialLocation = newyork;
+	        } else {
+	          alert("Your browser doesn't support geolocation. We've placed you in Big Apple!");
+	          initialLocation = newyork;
+	        }
+	        map.setCenter(initialLocation);
+	    }
+	  }
+	
+	</script>
   </head>
 
-  <body>
-
+  <body onload="initialize()">
+    
 <%
     Random rand=new Random();
 	double lat=rand.nextFloat()*20+ 30.99;
@@ -57,17 +112,23 @@
     User user = userService.getCurrentUser();
     if (user != null) {
 %>
-<p>Hello, <%= user.getNickname() %>! ([<%= user.getEmail() %>][<%= user.getAuthDomain() %>][<%= user.getUserId() %>][<%= user.getFederatedIdentity() %>])这里是《有客书局》(You can
+<p>Hello, <%= user.getNickname() %>! ([<%= user.getEmail() %>][<%= user.getAuthDomain() %>][<%= user.getUserId() %>])这里是《有客书局》(You can
 <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
 
 <img src="" alt=""/>
 <script src="https://www.googleapis.com/buzz/v1/people/<%= user.getEmail() %>/@self?alt=json&pp=1&key=AIzaSyBwmogjo3IlL5jt_8vIfytvIESY0mYgE-A&callback=handleResponse"></script>
 
 <blockquote>
+<p>终于等到您了!</p>
+<div id="map_canvas" style="width:70%; height:50%"></div>
+</blockquote>
+
+<blockquote>
 <p>您的八卦30条</p>
 <ul id="content1"></ul>
 <script src="https://www.googleapis.com/buzz/v1/activities/<%= user.getEmail() %>/@public?alt=json&callback=handler&key=AIzaSyBwmogjo3IlL5jt_8vIfytvIESY0mYgE-A&max-results=30"></script>
 </blockquote>
+
 
 <blockquote>
 <p>北京“新闻”30条<%= "(经:"+lat+",纬"+lon+"), 半径="+rad %></p>
